@@ -1,91 +1,62 @@
 package com.example.demo.controller;
 
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
+import com.example.demo.model.BorrowedRecord;
+import com.example.demo.model.Item;
+import com.example.demo.repository.BorrowedRecordRepository;
+import com.example.demo.repository.ItemRepository;
 
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.server.ResponseStatusException;
-import org.springframework.hateoas.CollectionModel;
-import org.springframework.hateoas.EntityModel;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.PutMapping;
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
+import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDateTime;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api")
 public class ShareStuffController {
 
-    @Autowired private ItemRepository itemRepo;
-    @Autowired private BorrowRecordRepository borrowRepo;
-    @Autowired private ReturnRequestRepository returnRepo;
-    @Autowired private InvitationRepository inviteRepo;
+    @Autowired
+    private ItemRepository itemRepo;
 
-    // Service 1: ค้นหาของในระบบ (K)
+    @Autowired
+    private BorrowedRecordRepository borrowRepo;
+
+    // Service 1: ค้นหาสิ่งของที่สามารถยืมได้
     @GetMapping("/items")
-    public List<Item> search(@RequestParam String name, @RequestParam String category) {
+    public List<Item> search(@RequestParam(required = false, defaultValue = "") String name,
+                             @RequestParam(required = false, defaultValue = "") String category) {
         return itemRepo.findByNameContainingAndCategoryContaining(name, category);
     }
 
-    // Service 2: ยืมของในระบบ (K)
+    // Service 2: ยืมของ
     @PostMapping("/borrow")
-    public ResponseEntity<String> borrow(@RequestParam Long itemId, @RequestParam String user) {
-        Item item = itemRepo.findById(itemId).orElseThrow();
-        if (item.getQuantity() > 0) {
-            item.setQuantity(item.getQuantity() - 1);
-            itemRepo.save(item);
+    public ResponseEntity<String> borrowItem(@RequestParam Long itemId,
+                                             @RequestParam String user) {
+        Item item = itemRepo.findById(itemId)
+                .orElseThrow(() -> new RuntimeException("Item not found"));
 
-            BorrowRecord record = new BorrowRecord();
-            record.setItemId(itemId);
-            record.setBorrowedBy(user);
-            record.setBorrowedAt(LocalDateTime.now());
-            borrowRepo.save(record);
-
-            return ResponseEntity.ok("Borrowed by " + user);
+        if (item.getQuantity() <= 0) {
+            return ResponseEntity.status(HttpStatus.CONFLICT)
+                    .body("Item is out of stock");
         }
-        return ResponseEntity.status(HttpStatus.CONFLICT).body("Out of stock");
+
+        item.setQuantity(item.getQuantity() - 1);
+        itemRepo.save(item);
+
+        BorrowedRecord record = new BorrowedRecord();
+        record.setItemId(itemId);
+        record.setBorrowedBy(user);
+        record.setBorrowedAt(LocalDateTime.now());
+        borrowRepo.save(record);
+
+        return ResponseEntity.ok("Item borrowed by " + user);
     }
 
-    // Service 3: ส่งคำขอคืนของ (N)
-    @PostMapping("/return-request")
-    public ResponseEntity<String> returnRequest(@RequestParam Long itemId, @RequestParam String fromUser, @RequestParam String toUser) {
-        ReturnRequest req = new ReturnRequest();
-        req.setItemId(itemId);
-        req.setFromUser(fromUser);
-        req.setToUser(toUser);
-        req.setRequestedAt(LocalDateTime.now());
-        returnRepo.save(req);
-        return ResponseEntity.ok("Return request sent from " + fromUser + " to " + toUser);
-    }
-
-    // Service 4: ส่งคำขอเชิญเข้าร่วมระบบ (N)
-    @PostMapping("/invite")
-    public ResponseEntity<String> invite(@RequestParam String fromUser, @RequestParam String toUser, @RequestParam String contact) {
-        Invitation inv = new Invitation();
-        inv.setFromUser(fromUser);
-        inv.setToUser(toUser);
-        inv.setContact(contact);
-        inv.setSentAt(LocalDateTime.now());
-        inviteRepo.save(inv);
-        return ResponseEntity.ok("Invitation sent to " + toUser);
-    }
-
-    // เพิ่ม endpoint ตรวจสอบคำขอ (ใช้ log/debug บนฝั่ง client)
-    @GetMapping("/requests/to/{user}")
-    public Map<String, Object> getRequests(@PathVariable String user) {
-        List<ReturnRequest> returnRequests = returnRepo.findByToUser(user);
-        List<Invitation> invitations = inviteRepo.findByToUser(user);
-
-        Map<String, Object> result = new HashMap<>();
-        result.put("returnRequests", returnRequests);
-        result.put("invitations", invitations);
-
-        return result;
+    // สำหรับดู log การยืม (debug client)
+    @GetMapping("/borrow/logs")
+    public List<BorrowedRecord> getBorrowLogs() {
+        return borrowRepo.findAll();
     }
 }
