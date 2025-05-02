@@ -5,7 +5,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 //load all context app
 @SpringBootTest
-class ClientApplicationTests {
+class ReturnRequestApplicationTests {
 
 	//primary check database loaded success
 	@Test

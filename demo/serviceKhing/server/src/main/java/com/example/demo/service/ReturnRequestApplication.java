@@ -20,26 +20,26 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
-import com.example.demo.Storage;
+import com.example.demo.model.BorrowedRecord;
 
 @SpringBootApplication
-public class Service2Application {
+public class ReturnRequestApplication {
 
-    private static final Logger log = LoggerFactory.getLogger(Service2Application.class);
+    private static final Logger log = LoggerFactory.getLogger(ReturnRequestApplication.class);
 
     public static void main(String[] args) {
-        SpringApplication.run(Service2Application.class, args);
+        SpringApplication.run(ReturnRequestApplication.class, args);
     }
 
     @Bean
     public RestTemplate restTemplate(RestTemplateBuilder builder) {
         return builder.build();
     }
-
+/* 
     @Bean
     public CommandLineRunner get(RestTemplate restTemplate) {
         return args -> {
-            /* 
+            
             try {
                 // Base URL for the API
                 String baseUrl = "http://localhost:8080/handytools";
@@ -70,7 +70,7 @@ public class Service2Application {
 
             } catch (Exception e) {
                 log.error("Error occurred while fetching handytools: ", e);
-            }*/
+            }
         };
-    }
+    }*/
 }
