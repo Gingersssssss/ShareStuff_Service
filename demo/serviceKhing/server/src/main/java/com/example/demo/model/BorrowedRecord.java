@@ -77,60 +77,8 @@ public class BorrowedRecord {
         return LocalDate.now().isAfter(borrowDate) && LocalDate.now().isAfter(dueDate);
     }
     
-    @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((id == null) ? 0 : id.hashCode());
-        result = prime * result + ((borrowedBy == null) ? 0 : borrowedBy.hashCode());
-        result = prime * result + ((itemId == null) ? 0 : itemId.hashCode());
-        result = prime * result + ((borrowDate == null) ? 0 : borrowDate.hashCode());
-        result = prime * result + ((dueDate == null) ? 0 : dueDate.hashCode());
-
-        return result;
-    }
-    
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        //Storage other = (Storage) obj;
-        if (id == null) {
-            if (other.id != null)
-                return false;
-        } else if (!id.equals(other.id))
-            return false;
-        if (borrowedBy == null) {
-            if (other.borrowedBy != null)
-                return false;
-        } else if (!borrowedBy.equals(other.borrowedBy))
-            return false;
-        if (itemId == null) {
-            if (other.itemId != null)
-                return false;
-        } else if (!itemId.equals(other.itemId))
-            return false;
-        if (borrowDate == null) {
-            if (other.borrowDate != null)
-                return false;
-        } else if (!borrowDate.equals(other.borrowDate))
-            return false;
-        if (dueDate == null) {
-            if (other.dueDate != null)
-                return false;
-        } else if (!dueDate.equals(other.dueDate))
-            return false;
-    
-        return true;
-    }
-    
-    @Override
-    public String toString() {
-        return "Storage [id=" + id + ", borrowedBy=" + borrowedBy + ", itemID=" + itemId + ", borrowDate="
-                + borrowDate + ", dueDate=" + dueDate + "]";
+    // Method to check if the item is borrowed by a specific user
+    public boolean isBorrowedBy(Long userId) {
+        return this.borrowedBy.equals(userId);
     }
 }

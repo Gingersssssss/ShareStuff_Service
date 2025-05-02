@@ -7,6 +7,20 @@ CREATE TABLE borrowed_record (
     FOREIGN KEY (item_id) REFERENCES item(id)
 );
 
+CREATE TABLE item_all (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    category VARCHAR(255) NOT NULL,
+    quantity INT NOT NULL
+);
+
+INSERT INTO item_all (name, category, quantity)
+VALUES 
+  ('Keyboard', 'Electronics', 5),
+  ('Mouse', 'Electronics', 3),
+  ('Chair', 'Furniture', 2);
+
+  
 INSERT INTO borrowed_record (borrower_id, item_id, borrow_date, due_date)
 VALUES 
     (101, 1, '2025-04-01', '2025-04-15'),
