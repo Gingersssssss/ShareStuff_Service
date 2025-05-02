@@ -10,9 +10,8 @@ public class BorrowedRecord {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Long borrowerId;
-    @ManyToOne
-    private Item item;
+    private Long itemId;
+    private Long borrowedBy;
     private LocalDate borrowDate;
     private LocalDate dueDate;
 
@@ -20,9 +19,9 @@ public class BorrowedRecord {
     public BorrowedRecord() {}
 
     // Parameterized constructor
-    public BorrowedRecord(Long borrowerId, Item item, LocalDate borrowDate, LocalDate dueDate) {
-        this.borrowerId = borrowerId;
-        this.item = item;
+    public BorrowedRecord(Long borrowedBy, Long itemId, LocalDate borrowDate, LocalDate dueDate) {
+        this.borrowedBy = borrowedBy;
+        this.itemId = itemId;
         this.borrowDate = borrowDate;
         this.dueDate = dueDate;
     }
@@ -36,20 +35,20 @@ public class BorrowedRecord {
         this.id = id;
     }
 
-    public Long getBorrowerId() {
-        return borrowerId;
+    public Long getBorrowedBy() {
+        return borrowedBy;
     }
 
-    public void setBorrowerId(Long borrowerId) {
-        this.borrowerId = borrowerId;
+    public void setBorrowedBy(Long borrowedBy) {
+        this.borrowedBy = borrowedBy;
     }
 
-    public Item getItem() {
-        return item;
+    public Item getItemId() {
+        return itemId;
     }
 
-    public void setItem(Item item) {
-        this.item = item;
+    public void setItemId(Item itemId) {
+        this.itemId = itemId;
     }
 
     public LocalDate getBorrowDate() {
@@ -83,8 +82,8 @@ public class BorrowedRecord {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((id == null) ? 0 : id.hashCode());
-        result = prime * result + ((borrowerId == null) ? 0 : borrowerId.hashCode());
-        result = prime * result + ((item == null) ? 0 : item.hashCode());
+        result = prime * result + ((borrowedBy == null) ? 0 : borrowedBy.hashCode());
+        result = prime * result + ((itemId == null) ? 0 : itemId.hashCode());
         result = prime * result + ((borrowDate == null) ? 0 : borrowDate.hashCode());
         result = prime * result + ((dueDate == null) ? 0 : dueDate.hashCode());
 
@@ -105,15 +104,15 @@ public class BorrowedRecord {
                 return false;
         } else if (!id.equals(other.id))
             return false;
-        if (borrowerId == null) {
-            if (other.borrowerId != null)
+        if (borrowedBy == null) {
+            if (other.borrowedBy != null)
                 return false;
-        } else if (!borrowerId.equals(other.borrowerId))
+        } else if (!borrowedBy.equals(other.borrowedBy))
             return false;
-        if (item == null) {
-            if (other.item != null)
+        if (itemId == null) {
+            if (other.itemId != null)
                 return false;
-        } else if (!item.equals(other.item))
+        } else if (!itemId.equals(other.itemId))
             return false;
         if (borrowDate == null) {
             if (other.borrowDate != null)
@@ -131,7 +130,7 @@ public class BorrowedRecord {
     
     @Override
     public String toString() {
-        return "Storage [id=" + id + ", borrowerId=" + borrowerId + ", item=" + item + ", borrowDate="
+        return "Storage [id=" + id + ", borrowedBy=" + borrowedBy + ", itemID=" + itemId + ", borrowDate="
                 + borrowDate + ", dueDate=" + dueDate + "]";
     }
 }
