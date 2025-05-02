@@ -1,46 +1,51 @@
-### 
+### 🔍 ดูรายการของทั้งหมด
+GET http://localhost:8080/api/items
 
-GET http://localhost:8080/handytools
 
-
-###
-POST http://localhost:8080/handytools
+### ➕ เพิ่มของใหม่
+POST http://localhost:8080/api/items
 Content-Type: application/json
 
 {
-    "toolDetail": "cutter",
-    "ownerName": "kt",
-    "locationName": "office drawer",
-    "borrowed": false,
-    "borrowedName": null
+  "name": "Tent",
+  "category": "Camping",
+  "quantity": 3
 }
 
-###
-POST http://localhost:8080/handytools
+
+### ➕ เพิ่มของอีกชิ้น
+POST http://localhost:8080/api/items
 Content-Type: application/json
 
 {
-    "toolDetail": "drill",
-    "ownerName": "kt",
-    "locationName": "hanging at the barn's wall",
-    "borrowed": false,
-    "borrowedName": null
+  "name": "Lantern",
+  "category": "Camping",
+  "quantity": 5
 }
 
-###
-GET http://localhost:8080/handytools/99
 
-###
-PUT http://localhost:8080/handytools/1
+### 🎯 ดูของตาม ID (ลองเปลี่ยนเลขดู)
+GET http://localhost:8080/api/items/1
+
+
+### 🔄 ยืมของ (ลดจำนวนลง 1)
+POST http://localhost:8080/api/borrow?itemId=1&user=anonymous
+
+
+### ♻️ คืนของ (ถ้ามี endpoint สำหรับคืน)
+POST http://localhost:8080/api/return?itemId=1
+
+
+### ✏️ แก้ไขข้อมูลของ
+PUT http://localhost:8080/api/items/1
 Content-Type: application/json
 
 {
-    "toolDetail": "new tool name for #1",
-    "ownerName": "kt",
-    "locationName": "in the box under the desk",
-    "borrowed": false,
-    "borrowedName": null
+  "name": "Tent",
+  "category": "Camping",
+  "quantity": 10
 }
 
-###
-DELETE http://localhost:8080/handytools/5
+
+### ❌ ลบของออกจากระบบ
+DELETE http://localhost:8080/api/items/1
