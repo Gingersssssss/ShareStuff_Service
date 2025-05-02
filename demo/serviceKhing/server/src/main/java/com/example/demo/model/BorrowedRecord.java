@@ -43,11 +43,11 @@ public class BorrowedRecord {
         this.borrowedBy = borrowedBy;
     }
 
-    public Item getItemId() {
+    public Long getItemId() {
         return itemId;
     }
 
-    public void setItemId(Item itemId) {
+    public void setItemId(Long itemId) {
         this.itemId = itemId;
     }
 
@@ -98,7 +98,7 @@ public class BorrowedRecord {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        Storage other = (Storage) obj;
+        //Storage other = (Storage) obj;
         if (id == null) {
             if (other.id != null)
                 return false;
