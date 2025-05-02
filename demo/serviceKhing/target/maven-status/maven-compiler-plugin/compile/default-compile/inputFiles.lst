@@ -1,2 +1,13 @@
-/mnt/c/demo/client/src/main/java/com/example/demo/ClientApplication.java
-/mnt/c/demo/client/src/main/java/com/example/demo/Storage.java
+/mnt/c/Users/acer/OneDrive/Documents/CS369 (2)/ShareStuff_Service/demo/serviceKhing/src/main/java/com/example/demo/Storage.java
+/mnt/c/Users/acer/OneDrive/Documents/CS369 (2)/ShareStuff_Service/demo/serviceKhing/src/main/java/com/example/demo/controller/BorrowedRecordController.java
+/mnt/c/Users/acer/OneDrive/Documents/CS369 (2)/ShareStuff_Service/demo/serviceKhing/src/main/java/com/example/demo/model/BorrowedRecord.java
+/mnt/c/Users/acer/OneDrive/Documents/CS369 (2)/ShareStuff_Service/demo/serviceKhing/src/main/java/com/example/demo/model/Item.java
+/mnt/c/Users/acer/OneDrive/Documents/CS369 (2)/ShareStuff_Service/demo/serviceKhing/src/main/java/com/example/demo/model/ReturnRequest.java
+/mnt/c/Users/acer/OneDrive/Documents/CS369 (2)/ShareStuff_Service/demo/serviceKhing/src/main/java/com/example/demo/model/ReturnedRecord.java
+/mnt/c/Users/acer/OneDrive/Documents/CS369 (2)/ShareStuff_Service/demo/serviceKhing/src/main/java/com/example/demo/model/Storage.java
+/mnt/c/Users/acer/OneDrive/Documents/CS369 (2)/ShareStuff_Service/demo/serviceKhing/src/main/java/com/example/demo/repository/BorrowedRecordRepository.java
+/mnt/c/Users/acer/OneDrive/Documents/CS369 (2)/ShareStuff_Service/demo/serviceKhing/src/main/java/com/example/demo/repository/ReturnRequestRepository.java
+/mnt/c/Users/acer/OneDrive/Documents/CS369 (2)/ShareStuff_Service/demo/serviceKhing/src/main/java/com/example/demo/repository/ReturnedRecordRepository.java
+/mnt/c/Users/acer/OneDrive/Documents/CS369 (2)/ShareStuff_Service/demo/serviceKhing/src/main/java/com/example/demo/repository/ReturnedRequestRepository.java
+/mnt/c/Users/acer/OneDrive/Documents/CS369 (2)/ShareStuff_Service/demo/serviceKhing/src/main/java/com/example/demo/repository/StorageRepository.java
+/mnt/c/Users/acer/OneDrive/Documents/CS369 (2)/ShareStuff_Service/demo/serviceKhing/src/main/java/com/example/demo/service/Service2Application.java

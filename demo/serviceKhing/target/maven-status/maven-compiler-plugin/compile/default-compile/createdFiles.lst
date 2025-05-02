@@ -1,0 +1,11 @@
+com/example/demo/model/Storage.class
+com/example/demo/repository/StorageRepository.class
+com/example/demo/repository/ReturnedRequestRepository.class
+com/example/demo/model/ReturnRequest.class
+com/example/demo/model/BorrowedRecord.class
+com/example/demo/Storage.class
+com/example/demo/repository/ReturnedRecordRepository.class
+com/example/demo/service/Service2Application.class
+com/example/demo/model/Item.class
+com/example/demo/model/ReturnedRecord.class
+com/example/demo/repository/BorrowedRecordRepository.class

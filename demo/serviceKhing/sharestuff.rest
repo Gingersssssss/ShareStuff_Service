@@ -1,9 +1,10 @@
-### 
-
+### Get all handytools
 GET http://localhost:8080/handytools
-
+Accept: application/json
 
 ###
+
+### Add a new handytool
 POST http://localhost:8080/handytools
 Content-Type: application/json
 
@@ -12,10 +13,12 @@ Content-Type: application/json
     "ownerName": "kt",
     "locationName": "office drawer",
     "borrowed": false,
-    "borrowedName": null
+    "borrowerName": null
 }
 
 ###
+
+### Add another handytool
 POST http://localhost:8080/handytools
 Content-Type: application/json
 
@@ -24,13 +27,18 @@ Content-Type: application/json
     "ownerName": "kt",
     "locationName": "hanging at the barn's wall",
     "borrowed": false,
-    "borrowedName": null
+    "borrowerName": null
 }
 
 ###
+
+### Get a specific handytool by ID
 GET http://localhost:8080/handytools/99
+Accept: application/json
 
 ###
+
+### Update a handytool by ID
 PUT http://localhost:8080/handytools/1
 Content-Type: application/json
 
@@ -39,8 +47,10 @@ Content-Type: application/json
     "ownerName": "kt",
     "locationName": "in the box under the desk",
     "borrowed": false,
-    "borrowedName": null
+    "borrowerName": null
 }
 
 ###
+
+### Delete a handytool by ID
 DELETE http://localhost:8080/handytools/5

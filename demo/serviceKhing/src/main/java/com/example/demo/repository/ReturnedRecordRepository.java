@@ -1,6 +1,6 @@
 package com.example.demo.repository;
 
-import com.example.demo.model.Borrowedecord;
+import com.example.demo.model.ReturnedRecord;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -8,6 +8,6 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Repository
-public interface ReturnedRecordRepository extends JpaRepository<Storage, Long> {
-    List<BorrowRecord> findByDueDateBeforeAndReturnedFalse(LocalDate date);
+public interface ReturnedRecordRepository extends JpaRepository<ReturnedRecord, Long> {
+    List<ReturnedRecord> findByDueDateBeforeAndReturnedFalse(LocalDate date);
 }

@@ -1,4 +1,4 @@
-package com.example.demo.client;
+package com.example.demo;
 
 public class Storage {
     private Long id;
