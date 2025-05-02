@@ -5,14 +5,24 @@ import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
 @Entity
+@Table(name = "borrowed_record")
 public class BorrowedRecord {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
+
+    @Column(name = "item_id")
     private Long itemId;
+
+    @Column(name = "borrower_id")
     private Long borrowedBy;
+
+    @Column(name = "borrow_date")
     private LocalDate borrowDate;
+
+    @Column(name = "due_date")
     private LocalDate dueDate;
 
     // Default constructor
@@ -74,11 +84,6 @@ public class BorrowedRecord {
 
     // Method to check if the item is overdue
     public boolean isOverdue() {
-        return LocalDate.now().isAfter(borrowDate) && LocalDate.now().isAfter(dueDate);
-    }
-    
-    // Method to check if the item is borrowed by a specific user
-    public boolean isBorrowedBy(Long userId) {
-        return this.borrowedBy.equals(userId);
+        return LocalDate.now().isAfter(dueDate);
     }
 }
