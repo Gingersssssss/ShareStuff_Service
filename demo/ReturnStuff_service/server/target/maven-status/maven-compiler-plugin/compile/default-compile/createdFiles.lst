@@ -1,0 +1,4 @@
+com/example/demo/ReturnRequestApplication.class
+com/example/demo/model/BorrowedRecord.class
+com/example/demo/controller/BorrowedRecordController.class
+com/example/demo/repository/BorrowedRecordRepository.class
