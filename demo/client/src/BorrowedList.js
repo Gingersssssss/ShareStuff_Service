@@ -14,6 +14,22 @@ function BorrowedList() {
     }
   };
 
+  // ฟังก์ชันสำหรับคืนของ
+  const handleReturn = async (id) => {
+    const confirmReturn = window.confirm('คุณแน่ใจหรือไม่ว่าต้องการคืนของรายการนี้?');
+    if (!confirmReturn) return;
+
+    try {
+      await axios.post(`http://localhost:8081/api/return/${id}`);
+      alert('คืนของเรียบร้อยแล้ว');
+      fetchBorrowedRecords(); // โหลดข้อมูลใหม่หลังจากคืนของ
+    } catch (error) {
+      console.error('Error returning item:', error);
+      alert('เกิดข้อผิดพลาดในการคืนของ');
+    }
+  };
+
+
   useEffect(() => {
     fetchBorrowedRecords();
   }, []);
@@ -37,6 +53,9 @@ function BorrowedList() {
               <td>{record.itemId}</td>
               <td>{record.borrowDate}</td>
               <td>{record.dueDate}</td>
+              <td>
+                <button onClick={() => handleReturn(record.id)}>คืนของ</button>
+              </td>
             </tr>
           ))}
         </tbody>

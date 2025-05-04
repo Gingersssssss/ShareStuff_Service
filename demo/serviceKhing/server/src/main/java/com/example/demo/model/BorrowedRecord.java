@@ -16,8 +16,9 @@ public class BorrowedRecord {
     @Column(name = "item_id")
     private Long itemId;
 
+    
     @Column(name = "borrower_id")
-    private Long borrowedBy;
+    private String borrowedBy;
 
     @Column(name = "borrow_date")
     private LocalDate borrowDate;
@@ -29,8 +30,7 @@ public class BorrowedRecord {
     public BorrowedRecord() {}
 
     // Parameterized constructor
-    public BorrowedRecord(Long borrowedBy, Long itemId, LocalDate borrowDate, LocalDate dueDate) {
-        this.borrowedBy = borrowedBy;
+    public BorrowedRecord( String borrowedBy, Long itemId, LocalDate borrowDate, LocalDate dueDate) {
         this.itemId = itemId;
         this.borrowDate = borrowDate;
         this.dueDate = dueDate;
@@ -45,11 +45,11 @@ public class BorrowedRecord {
         this.id = id;
     }
 
-    public Long getBorrowedBy() {
+    public String getBorrowedBy() {
         return borrowedBy;
     }
 
-    public void setBorrowedBy(Long borrowedBy) {
+    public void setBorrowedBy(String borrowedBy) {
         this.borrowedBy = borrowedBy;
     }
 
