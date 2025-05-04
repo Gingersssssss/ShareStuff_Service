@@ -17,13 +17,13 @@ public class BorrowedRecordController {
     @Autowired
     private BorrowedRecordRepository borrowedRepo;
 
-    // ✅ GET /api/borrowed -> ส่งรายการยืมทั้งหมด
+    //ส่งรายการยืมทั้งหมด
     @GetMapping("/borrowed")
     public List<BorrowedRecord> getAllBorrowed() {
         return borrowedRepo.findAll();
     }
 
-    // ✅ POST /api/return/{id} -> คืนของ
+    //คืนของตาม id
     @PostMapping("/return/{id}")
     public ResponseEntity<String> returnItem(@PathVariable Long id) {
         borrowedRepo.deleteById(id);

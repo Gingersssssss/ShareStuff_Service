@@ -44,12 +44,13 @@ function BorrowedList() {
             <th>Item ID</th>
             <th>Borrow Date</th>
             <th>Due Date</th>
+            <th>Return Action</th>
           </tr>
         </thead>
         <tbody>
           {records.map((record) => (
             <tr key={record.id}>
-              <td>{record.borrowerId}</td>
+              <td>{record.borrowedBy}</td>
               <td>{record.itemId}</td>
               <td>{record.borrowDate}</td>
               <td>{record.dueDate}</td>
